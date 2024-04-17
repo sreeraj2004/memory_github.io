@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Display Images</title>
+      <style>
+          body {
+              background-color: #E5DDC5;
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+          }
+          .container {
+              max-width: 1200px;
+              margin: 0 auto;
+              padding: 20px;
+          }
+          h1 {
+              text-align: center;
+              color: #704264;
+          }
+          h2 {
+              text-align: center;
+              color: #704264;
+              margin-top: 20px;
+          }
+          .image-container {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              margin-top: 20px;
+          }
+          .image-container img {
+              width: 300px;
+              max-height: 400px;
+              margin: 10px;
+              border-radius: 10px;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+              transition: transform 0.3s ease-in-out;
+              cursor: pointer;
+          }
+          .image-container img:hover {
+              transform: scale(1.05);
+          }
+          /* Modal styles */
+          .modal {
+              display: none;
+              position: fixed;
+              z-index: 1;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              overflow: auto;
+              background-color: rgba(0, 0, 0, 0.5);
+          }
+          .modal-content {
+              background-color: #fefefe;
+              margin: 15% auto;
+              padding: 20px;
+              border: 1px solid #888;
+              border-radius: 10px;
+              width: 80%;
+              max-width: 500px;
+              text-align: center;
+          }
+          .modal-content button {
+              margin: 10px;
+              padding: 10px 20px;
+              cursor: pointer;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <h1>Uploaded Images</h1>
+          <h2>Gallery</h2>
+          <div class="image-container">
+              <% uploadedFiles.forEach(file => { %>
+                  <img src="/uploads/<%= file %>" alt="<%= file %>" onclick="openModal('<%= file %>')">
+              <% }); %>
+          </div>
+      </div>
+  
+      
+      <div id="myModal" class="modal">
+          <div class="modal-content">
+              <button id="deleteBtn">Delete Image</button>
+              <button id="fullscreenBtn">View Fullscreen</button>
+          </div>
+      </div>
+  
+      <script>
+          // Get the modal
+          const modal = document.getElementById("myModal");
+  
+          // Function to open modal
+          function openModal(filename) {
+              modal.style.display = "block";
+  
+              // Add event listener for delete button
+              const deleteBtn = document.getElementById("deleteBtn");
+              deleteBtn.onclick = function() {
+                  if (confirm('Are you sure you want to delete this image?')) {
+                      fetch(`/delete?filename=${filename}`, {
+                          method: 'DELETE'
+                      })
+                      .then(response => {
+                          if (response.ok) {
+                              // Redirect to display page after successful deletion
+                              window.location.href = '/display';
+                          } else {
+                              throw new Error('Failed to delete image');
+                          }
+                      })
+                      .catch(error => {
+                          console.error('Error:', error);
+                          alert('Failed to delete image');
+                      });
+                  }
+              };
+  
+              // Add event listener for fullscreen button
+              const fullscreenBtn = document.getElementById("fullscreenBtn");
+              fullscreenBtn.onclick = function() {
+                  // Implement logic to view image in fullscreen
+                  // For example, you can open the image in a new tab
+                  window.open(`/uploads/${filename}`, '_blank');
+              };
+          }
+  
+          // Function to close modal when clicking outside of it
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+              }
+          }
+      </script>
+  </body>
+  </html> 
+
+
+  
