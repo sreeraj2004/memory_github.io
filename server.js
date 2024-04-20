@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 mongoose.connect('mongodb://localhost:27017/imageUpload', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    // useUnifiedTopology: true
 })
     .then(() => console.log("db is connected"))
     .catch((err) => console.log(err, "It has an error"));
