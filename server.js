@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 mongoose.connect('mongodb://localhost:27017/imageUpload', {
-    useNewUrlParser: true,
+    // useNewUrlParser: true,
     // useUnifiedTopology: true
 })
     .then(() => console.log("db is connected"))
