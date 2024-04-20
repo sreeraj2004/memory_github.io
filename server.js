@@ -12,10 +12,7 @@ const ImageModel = require("./imagemodel");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-mongoose.connect('mongodb://localhost:27017/imageUpload', { // removed semicolon after connect
-    useNewUrlParser: true,
-    useUnifiedTopology: true // re-added useUnifiedTopology
-})
+mongoose.connect('mongodb://localhost:27017/imageUpload')
     .then(() => console.log("db is connected"))
     .catch((err) => console.log(err, "It has an error"));
 
