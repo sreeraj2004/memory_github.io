@@ -13,10 +13,7 @@ const ImageModel = require("./imagemodel");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-mongoose.connect(DATABASE_URL, { 
-    useNewUrlParser: true,
-    useUnifiedTopology: true 
-})
+mongoose.connect(DATABASE_URL)
     .then(() => console.log("db is connected"))
     .catch((err) => console.log(err, "It has an error"));
 
