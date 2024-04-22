@@ -5,14 +5,18 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs').promises; 
-const PORT = process.env.PORT || 3010; // corrected logical OR operator
+const PORT = process.env.PORT || 3000; 
+const DATABASE_URL = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/imageUpload"; // Fixed typo in "mongodb"
 
 const ImageModel = require("./imagemodel");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-mongoose.connect('mongodb://localhost:27017/imageUpload')
+mongoose.connect(DATABASE_URL, { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true 
+})
     .then(() => console.log("db is connected"))
     .catch((err) => console.log(err, "It has an error"));
 
