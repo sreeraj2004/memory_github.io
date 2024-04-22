@@ -6,7 +6,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs').promises; 
 const PORT = process.env.PORT || 3000; 
-const DATABASE_URL = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/imageUpload"; // Fixed typo in "mongodb"
+const DATABASE_URL = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/imageUpload"; 
 
 const ImageModel = require("./imagemodel");
 
