@@ -6,7 +6,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs').promises; 
 const PORT = process.env.PORT || 3000; 
-const DATABASE_URL = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/imageUpload"; 
+const DATABASE_URL = "mongodb+srv://sreerajmutha:pTt6IWr5QTX4J67a@cluster0.mfz5oty.mongodb.net/"; // Fixed typo in "mongodb"
 
 const ImageModel = require("./imagemodel");
 
@@ -89,3 +89,4 @@ app.get('/display', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
+
